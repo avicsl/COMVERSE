@@ -1,0 +1,83 @@
+CREATE DATABASE comverse;
+ 
+USE comverse;
+
+-- STUDENT TABLE --------------------------------------------------------------------------------------------------------------
+CREATE TABLE users (
+
+    student_number VARCHAR(7) PRIMARY KEY,
+    email VARCHAR(100) UNIQUE NOT NULL CHECK (email LIKE '%@gmail.com'),
+    password VARCHAR(255) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    department VARCHAR(50) NOT NULL,
+    course VARCHAR(50) NOT NULL
+);
+
+-- ✅ Trigger to auto-generate 'id' for users
+DELIMITER $$
+ 
+CREATE TRIGGER before_insert_users
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+    DECLARE next_student_number INT;
+    -- Get the highest existing ID number and increment it
+    SELECT IFNULL(MAX(CAST(SUBSTRING(student_number, 5, 3) AS UNSIGNED)), 0) + 1 
+    INTO next_student_number FROM users;
+    -- Generate the new ID format 'AAP-XXX'
+    SET NEW.student_number = CONCAT('CV-', LPAD(next_student_number, 3, '0'));
+END$$
+DELIMITER ;
+
+SELECT * FROM product
+
+INSERT INTO users (email, password, first_name, last_name, department, course)
+VALUES 
+('juan.delacruz@gmail.com', 'password123', 'Juan', 'Delacruz', 'Computer Science', 'BSCS'),
+('maria.santos@gmail.com', 'mypassword', 'Maria', 'Santos', 'Information Technology', 'BSIT'),
+('pedro.reyes@gmail.com', 'pass456', 'Pedro', 'Reyes', 'Computer Science', 'BSCS');
+
+-- CATEGORY TABLE --------------------------------------------------------------------------------------------------------------
+CREATE TABLE category (
+    category_id VARCHAR(100) PRIMARY KEY,
+    category_name VARCHAR(20) UNIQUE NOT NULL 
+);
+
+INSERT INTO category (category_id, category_name) VALUES
+('C001 - SHIRT', 'SHIRT'),
+('C002 - CAP', 'CAP'),
+('C003 - BAG', 'BAG'),
+('C004 - JACKET', 'JACKET'),
+('C005 - LACE', 'LACE');
+DROP TABLE product
+-- CATEGORY TABLE --------------------------------------------------------------------------------------------------------------
+CREATE TABLE product (
+    product_id VARCHAR(10) PRIMARY KEY,
+    category_id VARCHAR(100),
+    product_name VARCHAR(50),
+    image_url VARCHAR(255),
+    amount DECIMAL(10,2),
+    quantity int,
+    FOREIGN KEY (category_id) REFERENCES category(category_id)
+);
+ 
+DELIMITER $$
+
+CREATE TRIGGER before_insert_product
+BEFORE INSERT ON product
+FOR EACH ROW
+BEGIN
+    DECLARE next_product_id INT;
+    -- Get the highest existing ID number and increment it
+    SELECT IFNULL(MAX(CAST(SUBSTRING(product_id, 5, 3) AS UNSIGNED)), 0) + 1 
+    INTO next_product_id FROM product;
+    -- Generate the new ID format 'AAP-XXX'
+    SET NEW.product_id = CONCAT('COM-', LPAD(next_product_id, 3, '0'));
+END$$
+DELIMITER ;
+
+
+ 
+
+ 
