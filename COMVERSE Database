@@ -30,13 +30,6 @@ BEGIN
 END$$
 DELIMITER ;
 
-SELECT * FROM product
-
-INSERT INTO users (email, password, first_name, last_name, department, course)
-VALUES 
-('juan.delacruz@gmail.com', 'password123', 'Juan', 'Delacruz', 'Computer Science', 'BSCS'),
-('maria.santos@gmail.com', 'mypassword', 'Maria', 'Santos', 'Information Technology', 'BSIT'),
-('pedro.reyes@gmail.com', 'pass456', 'Pedro', 'Reyes', 'Computer Science', 'BSCS');
 
 -- CATEGORY TABLE --------------------------------------------------------------------------------------------------------------
 CREATE TABLE category (
@@ -50,7 +43,9 @@ INSERT INTO category (category_id, category_name) VALUES
 ('C003 - BAG', 'BAG'),
 ('C004 - JACKET', 'JACKET'),
 ('C005 - LACE', 'LACE');
-DROP TABLE product
+
+SELECT * FROM category ORDER BY category_id ASC;
+
 -- CATEGORY TABLE --------------------------------------------------------------------------------------------------------------
 CREATE TABLE product (
     product_id VARCHAR(10) PRIMARY KEY,
@@ -77,7 +72,70 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- CART TABLE --------------------------------------------------------------------------------------------------------------
+CREATE TABLE cart (
+    cart_id VARCHAR(100) PRIMARY KEY,
+    product_id VARCHAR(20) NOT NULL,
+    student_number VARCHAR(7) NOT NULL,   
+    image_url VARCHAR(255) NOT NULL,
+    quantity INT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES product(product_id),
+    FOREIGN KEY (student_number) REFERENCES users(student_number)
+);
 
- 
 
+DELIMITER $$
+
+CREATE TRIGGER before_insert_cart
+BEFORE INSERT ON cart
+FOR EACH ROW
+BEGIN
+    DECLARE next_cart_id INT;
+    -- Get the highest existing cart number and increment it
+    SELECT IFNULL(MAX(CAST(SUBSTRING(cart_id, 6) AS UNSIGNED)), 0) + 1
+    INTO next_cart_id FROM cart;
+    -- Generate the new ID format 'CART-XXX'
+    SET NEW.cart_id = CONCAT('CART-', LPAD(next_cart_id, 3, '0'));
+END$$
+
+DELIMITER ;
+
+drop table cart
+ SELECT * FROM cart
  
+ -- ORDER TABLE --------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE orders (
+    order_id VARCHAR(20) PRIMARY KEY,
+    product_id VARCHAR(10) NOT NULL,
+    cart_id VARCHAR(100) NOT NULL,
+    student_number VARCHAR(7) NOT NULL,
+    order_date DATE NOT NULL,
+    quantity INT NOT NULL,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (product_id) REFERENCES product(product_id),
+    FOREIGN KEY (cart_id) REFERENCES cart(cart_id),
+    FOREIGN KEY (student_number) REFERENCES users(student_number)
+);
+
+DELIMITER $$
+
+CREATE TRIGGER before_insert_orders
+BEFORE INSERT ON orders
+FOR EACH ROW
+BEGIN
+    DECLARE next_order_id INT;
+
+    -- Generate the next order ID
+    SELECT IFNULL(MAX(CAST(SUBSTRING(order_id, 5) AS UNSIGNED)), 0) + 1
+    INTO next_order_id FROM orders;
+
+    -- Set order_id to format 'ORD-###'
+    SET NEW.order_id = CONCAT('ORD-', LPAD(next_order_id, 3, '0'));
+
+    -- Automatically set order_date to current date
+    SET NEW.order_date = CURDATE();
+END$$
+
+DELIMITER ;
