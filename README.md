@@ -14,7 +14,7 @@ Rather than focusing on user interface design or front-end development, COMVERSE
 
 - **Visual Studio Code (VSCode)**: For code editing and project management.
 - **MySQL**: Core relational database management system.
-- **SceneBuilder**: For designing any JavaFX UI layouts (if applicable).
+- **SceneBuilder**: For designing any JavaFX UI layouts.
 
 ## Key Features
 
