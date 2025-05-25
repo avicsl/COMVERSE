@@ -61,10 +61,8 @@ BEFORE INSERT ON product
 FOR EACH ROW
 BEGIN
     DECLARE next_product_id INT;
-    -- Get the highest existing ID number and increment it
     SELECT IFNULL(MAX(CAST(SUBSTRING(product_id, 5, 3) AS UNSIGNED)), 0) + 1 
     INTO next_product_id FROM product;
-    -- Generate the new ID format 'AAP-XXX'
     SET NEW.product_id = CONCAT('COM-', LPAD(next_product_id, 3, '0'));
 END$$
 DELIMITER ;
