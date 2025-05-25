@@ -43,7 +43,7 @@ INSERT INTO category (category_id, category_name) VALUES
 
 SELECT * FROM category ORDER BY category_id ASC;
 
--- CATEGORY TABLE --------------------------------------------------------------------------------------------------------------
+-- PRODUCT TABLE --------------------------------------------------------------------------------------------------------------
 CREATE TABLE product (
     product_id VARCHAR(10) PRIMARY KEY,
     category_id VARCHAR(100),
