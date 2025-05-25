@@ -117,14 +117,10 @@ FOR EACH ROW
 BEGIN
     DECLARE next_order_id INT;
 
-    -- Generate the next order ID
     SELECT IFNULL(MAX(CAST(SUBSTRING(order_id, 5) AS UNSIGNED)), 0) + 1
     INTO next_order_id FROM orders;
-
-    -- Set order_id to format 'ORD-###'
     SET NEW.order_id = CONCAT('ORD-', LPAD(next_order_id, 3, '0'));
 
-    -- Automatically set order_date to current date
     SET NEW.order_date = CURDATE();
 END$$
 
