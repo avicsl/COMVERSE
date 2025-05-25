@@ -87,17 +87,12 @@ BEFORE INSERT ON cart
 FOR EACH ROW
 BEGIN
     DECLARE next_cart_id INT;
-    -- Get the highest existing cart number and increment it
     SELECT IFNULL(MAX(CAST(SUBSTRING(cart_id, 6) AS UNSIGNED)), 0) + 1
     INTO next_cart_id FROM cart;
-    -- Generate the new ID format 'CART-XXX'
     SET NEW.cart_id = CONCAT('CART-', LPAD(next_cart_id, 3, '0'));
 END$$
 
 DELIMITER ;
-
-drop table cart
- SELECT * FROM cart
  
  -- ORDER TABLE --------------------------------------------------------------------------------------------------------------
 
