@@ -3,6 +3,7 @@ CREATE DATABASE comverse;
 USE comverse;
 
 -- STUDENT TABLE --------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE users (
 
     student_number VARCHAR(7) PRIMARY KEY,
@@ -27,8 +28,8 @@ BEGIN
 END$$
 DELIMITER ;
 
-
 -- CATEGORY TABLE --------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE category (
     category_id VARCHAR(100) PRIMARY KEY,
     category_name VARCHAR(20) UNIQUE NOT NULL 
@@ -44,6 +45,7 @@ INSERT INTO category (category_id, category_name) VALUES
 SELECT * FROM category ORDER BY category_id ASC;
 
 -- PRODUCT TABLE --------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE product (
     product_id VARCHAR(10) PRIMARY KEY,
     category_id VARCHAR(100),
@@ -68,6 +70,7 @@ END$$
 DELIMITER ;
 
 -- CART TABLE --------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE cart (
     cart_id VARCHAR(100) PRIMARY KEY,
     product_id VARCHAR(20) NOT NULL,
