@@ -260,7 +260,7 @@ public class UserCartController {
         showAlert("No items in cart.", Alert.AlertType.WARNING);
         return;
     }
- 
+
     // Collect selected items
     List<CartItem> selectedItems = new ArrayList<>();
     for (CartItem item : cartItems) {
@@ -268,23 +268,23 @@ public class UserCartController {
             selectedItems.add(item);
         }
     }
- 
+
     if (selectedItems.isEmpty()) {
         showAlert("No items selected for checkout.", Alert.AlertType.WARNING);
         return;
     }
- 
+
     String studentNumber = UserLoginController.loggedInUser.getStudentNumber();
- 
+
     try (Connection conn = DatabaseHandler.getDBConnection()) {
         conn.setAutoCommit(false); // Begin transaction
- 
+
         String getNextTransactionId = "SELECT IFNULL(MAX(CAST(SUBSTRING(transaction_id, 5) AS UNSIGNED)), 0) + 1 AS next_id FROM orders";
         String orderInsert = "INSERT INTO orders (transaction_id, product_id, student_number, image_url, order_date, quantity, total_amount) VALUES (?, ?, ?, ?, CURDATE(), ?, ?)";
         String getCartId = "SELECT cart_id FROM cart WHERE product_id = ? AND student_number = ?";
         String deleteCart = "DELETE FROM cart WHERE cart_id = ?";
         String updateProductQuantity = "UPDATE product SET quantity = quantity - ? WHERE product_id = ?";
- 
+
         try (
             PreparedStatement transactionIdStmt = conn.prepareStatement(getNextTransactionId);
             PreparedStatement orderStmt = conn.prepareStatement(orderInsert);
@@ -299,20 +299,20 @@ public class UserCartController {
                 transactionId = "TRN-" + String.format("%03d", rs.getInt("next_id"));
             }
             rs.close();
- 
+
             // Calculate total amount + ₱40 fee
             BigDecimal totalAmountSum = BigDecimal.ZERO;
             List<String> cartIdsToDelete = new ArrayList<>();
- 
+
             for (CartItem item : selectedItems) {
                 BigDecimal itemTotal = BigDecimal.valueOf(item.getQuantity() * item.getPrice());
                 totalAmountSum = totalAmountSum.add(itemTotal);
- 
+
                 // Prepare update quantity
                 updateProductStmt.setInt(1, item.getQuantity());
                 updateProductStmt.setString(2, item.getProductID());
                 updateProductStmt.addBatch();
- 
+
                 // Get cart_id for deletion
                 getCartIdStmt.setString(1, item.getProductID());
                 getCartIdStmt.setString(2, studentNumber);
@@ -326,9 +326,9 @@ public class UserCartController {
                 }
                 cartRs.close();
             }
- 
+
             totalAmountSum = totalAmountSum.add(BigDecimal.valueOf(40));
- 
+
             // Insert orders
             for (CartItem item : selectedItems) {
                 orderStmt.setString(1, transactionId);
@@ -339,22 +339,27 @@ public class UserCartController {
                 orderStmt.setBigDecimal(6, totalAmountSum);
                 orderStmt.addBatch();
             }
- 
+
             // Execute batches
             updateProductStmt.executeBatch();
             orderStmt.executeBatch();
- 
+
             // Delete cart entries
             for (String cartId : cartIdsToDelete) {
                 deleteCartStmt.setString(1, cartId);
                 deleteCartStmt.addBatch();
             }
             deleteCartStmt.executeBatch();
- 
+
             conn.commit(); // Commit all changes
             cartItems.removeAll(selectedItems);
+            
+            // Show success message
             showAlert("Total Amount: ₱" + totalAmountSum, Alert.AlertType.INFORMATION);
- 
+            
+            // Navigate to usercheckout.fxml after successful checkout
+            navigateToCheckout();
+
         } catch (SQLException ex) {
             conn.rollback();
             ex.printStackTrace();
@@ -365,8 +370,17 @@ public class UserCartController {
         showAlert("Database error.", Alert.AlertType.ERROR);
     }
 }
- 
- 
+
+private void navigateToCheckout() {
+    try {
+        javafx.scene.layout.AnchorPane view = javafx.fxml.FXMLLoader.load(getClass().getResource("/UserUI/usercheckout.fxml"));
+        UserController.instance.setCenterContent(view);
+        
+    } catch (java.io.IOException e) {
+        e.printStackTrace();
+        showAlert("Failed to load checkout page.", Alert.AlertType.ERROR);
+    }
+}
  
     private void showAlert(String message, Alert.AlertType alertType) {
     Alert alert = new Alert(alertType);
