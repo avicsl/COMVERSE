@@ -120,3 +120,54 @@ BEGIN
     END IF;
 END$$
 DELIMITER ;
+
+-- SHIPPING TABLE --------------------------------------------------------------------------------------------------------------
+CREATE TABLE shipping (
+    shipping_id VARCHAR(100) PRIMARY KEY,
+    order_id VARCHAR(100) NOT NULL,
+    shipping_address VARCHAR(255) NOT NULL,
+    shipping_date DATE NOT NULL,
+    shipping_amount DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+);
+
+DELIMITER $$
+CREATE TRIGGER before_insert_shipping
+BEFORE INSERT ON shipping
+FOR EACH ROW
+BEGIN
+    DECLARE next_shipping_id INT;
+    SELECT IFNULL(MAX(CAST(SUBSTRING(shipping_id, 6) AS UNSIGNED)), 0) + 1
+    INTO next_shipping_id FROM shipping;
+    SET NEW.shipping_id = CONCAT('SHIP-', LPAD(next_shipping_id, 3, '0'));
+    IF NEW.shipping_date IS NULL THEN
+        SET NEW.shipping_date = CURDATE();
+    END IF;
+    SET NEW.shipping_amount = 40;
+END$$
+DELIMITER ;
+
+-- PAYMENT TABLE --------------------------------------------------------------------------------------------------------------
+CREATE TABLE payment (
+    payment_id VARCHAR(100) PRIMARY KEY,
+    order_id VARCHAR(100) NOT NULL,
+    payment_amount DECIMAL(10,2) NOT NULL,
+    payment_method VARCHAR(50) NOT NULL,
+    payment_date DATE NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+);
+
+DELIMITER $$
+CREATE TRIGGER before_insert_payment
+BEFORE INSERT ON payment
+FOR EACH ROW
+BEGIN
+    DECLARE next_payment_id INT;
+    SELECT IFNULL(MAX(CAST(SUBSTRING(payment_id, 6) AS UNSIGNED)), 0) + 1
+    INTO next_payment_id FROM payment;
+    SET NEW.payment_id = CONCAT('PAY-', LPAD(next_payment_id, 3, '0'));
+    IF NEW.payment_date IS NULL THEN
+        SET NEW.payment_date = CURDATE();
+    END IF;
+END$$
+DELIMITER ;
