@@ -81,23 +81,19 @@ CREATE TABLE cart (
 
 
 DELIMITER $$
-
 CREATE TRIGGER before_insert_cart
 BEFORE INSERT ON cart
 FOR EACH ROW
 BEGIN
     DECLARE next_cart_id INT;
-    -- Get the highest existing cart number and increment it
     SELECT IFNULL(MAX(CAST(SUBSTRING(cart_id, 6) AS UNSIGNED)), 0) + 1
     INTO next_cart_id FROM cart;
-    -- Generate the new ID format 'CART-XXX'
     SET NEW.cart_id = CONCAT('CART-', LPAD(next_cart_id, 3, '0'));
 END$$
-
 DELIMITER ;
 
 drop table orders
- SELECT * FROM orders
+SELECT * FROM orders
  
  -- ORDER TABLE --------------------------------------------------------------------------------------------------------------
 
@@ -117,22 +113,20 @@ CREATE TABLE orders (
 
 
 DELIMITER $$
-
 CREATE TRIGGER before_insert_orders
 BEFORE INSERT ON orders
 FOR EACH ROW
 BEGIN
     DECLARE next_order_id INT;
-
-    -- Generate the next order ID
     SELECT IFNULL(MAX(CAST(SUBSTRING(order_id, 5) AS UNSIGNED)), 0) + 1
     INTO next_order_id FROM orders;
-
-    -- Set order_id to format 'ORD-###'
     SET NEW.order_id = CONCAT('ORD-', LPAD(next_order_id, 3, '0'));
-
-    -- Automatically set order_date to current date
     SET NEW.order_date = CURDATE();
 END$$
-
 DELIMITER ;
+
+ -- PAYMENT TABLE --------------------------------------------------------------------------------------------------------------
+
+
+ -- SHIPMENT TABLE --------------------------------------------------------------------------------------------------------------
+
