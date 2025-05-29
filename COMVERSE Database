@@ -14,7 +14,6 @@ CREATE TABLE users (
     course VARCHAR(50) NOT NULL
 );
 
--- ✅ Trigger to auto-generate 'id' for users
 DELIMITER $$
  
 CREATE TRIGGER before_insert_users
@@ -22,10 +21,8 @@ BEFORE INSERT ON users
 FOR EACH ROW
 BEGIN
     DECLARE next_student_number INT;
-    -- Get the highest existing ID number and increment it
     SELECT IFNULL(MAX(CAST(SUBSTRING(student_number, 5, 3) AS UNSIGNED)), 0) + 1 
-    INTO next_student_number FROM users;
-    -- Generate the new ID format 'AAP-XXX'
+    INTO next_student_number FROM users;\
     SET NEW.student_number = CONCAT('CV-', LPAD(next_student_number, 3, '0'));
 END$$
 DELIMITER ;
