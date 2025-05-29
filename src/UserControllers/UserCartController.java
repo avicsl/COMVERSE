@@ -353,7 +353,7 @@ public class UserCartController {
  
             conn.commit(); // Commit all changes
             cartItems.removeAll(selectedItems);
-            showAlert("Checkout successful! Total Amount: ₱" + totalAmountSum, Alert.AlertType.INFORMATION);
+            showAlert("Total Amount: ₱" + totalAmountSum, Alert.AlertType.INFORMATION);
  
         } catch (SQLException ex) {
             conn.rollback();
