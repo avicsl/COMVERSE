@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="458.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserControllers.UserShirtController">
+<AnchorPane prefHeight="458.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserControllers.UserCheckoutController">
    <children>
       <ImageView fitHeight="514.0" fitWidth="894.0" layoutX="-1.0" layoutY="2.0">
          <image>
@@ -42,7 +42,7 @@
             <Font name="Rockwell" size="12.0" />
          </font>
       </Label>
-      <TextField id="fnameTextfield" fx:id="productNameTextField1" layoutX="182.0" layoutY="130.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="650.0" promptText="551 MF Jhocson St. Sampaloc, Manila, PH ">
+      <TextField id="fnameTextfield" fx:id="shippingaddress" layoutX="182.0" layoutY="130.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="650.0" promptText="551 MF Jhocson St. Sampaloc, Manila, PH ">
          <font>
             <Font name="Rockwell" size="12.0" />
          </font>
@@ -52,13 +52,13 @@
             <Font name="Rockwell" size="12.0" />
          </font>
       </Label>
-      <ComboBox fx:id="categorycombobox1" layoutX="182.0" layoutY="220.0" prefHeight="26.0" prefWidth="650.0" />
+      <ComboBox fx:id="paymentmethod" layoutX="182.0" layoutY="220.0" prefHeight="26.0" prefWidth="650.0" />
       <Label layoutX="60.0" layoutY="179.0" text="Shipping Amount:" textFill="#165834">
          <font>
             <Font name="Rockwell" size="12.0" />
          </font>
       </Label>
-      <TextField id="fnameTextfield" fx:id="productNameTextField11" layoutX="182.0" layoutY="175.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="650.0" promptText="50.00">
+      <TextField id="fnameTextfield" fx:id="samountfield" layoutX="182.0" layoutY="175.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="650.0" promptText="50.00">
          <font>
             <Font name="Rockwell" size="12.0" />
          </font>
@@ -68,7 +68,7 @@
             <Font name="Rockwell Bold" size="12.0" />
          </font>
       </Label>
-      <TextField id="fnameTextfield" fx:id="productNameTextField111" layoutX="182.0" layoutY="381.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="650.0" promptText="50000.00">
+      <TextField id="fnameTextfield" fx:id="totalamountfield" layoutX="182.0" layoutY="381.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="650.0" promptText="50000.00">
          <font>
             <Font name="Rockwell" size="12.0" />
          </font>
@@ -83,7 +83,7 @@
             <Font name="Rockwell" size="8.0" />
          </font>
       </Label>
-      <TextField id="fnameTextfield" fx:id="productNameTextField12" layoutX="182.0" layoutY="85.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="650.0" promptText="Flash Express">
+      <TextField id="fnameTextfield" fx:id="smethodfield" layoutX="182.0" layoutY="85.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="650.0" promptText="Flash Express">
          <font>
             <Font name="Rockwell" size="12.0" />
          </font>
