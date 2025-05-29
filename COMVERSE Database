@@ -4,7 +4,6 @@ USE comverse;
 
 -- STUDENT TABLE --------------------------------------------------------------------------------------------------------------
 CREATE TABLE users (
-
     student_number VARCHAR(7) PRIMARY KEY,
     email VARCHAR(100) UNIQUE NOT NULL CHECK (email LIKE '%@gmail.com'),
     password VARCHAR(255) NOT NULL,
@@ -15,20 +14,19 @@ CREATE TABLE users (
 );
 
 DELIMITER $$
- CREATE TRIGGER before_insert_users
+CREATE TRIGGER before_insert_users
 BEFORE INSERT ON users
 FOR EACH ROW
 BEGIN
     DECLARE next_student_number INT;
     SELECT IFNULL(MAX(CAST(SUBSTRING(student_number, 5, 3) AS UNSIGNED)), 0) + 1 
-    INTO next_student_number FROM users;\
+    INTO next_student_number FROM users;
     SET NEW.student_number = CONCAT('CV-', LPAD(next_student_number, 3, '0'));
 END$$
 DELIMITER ;
 
 
 -- CATEGORY TABLE --------------------------------------------------------------------------------------------------------------
-
 CREATE TABLE category (
     category_id VARCHAR(100) PRIMARY KEY,
     category_name VARCHAR(20) UNIQUE NOT NULL 
@@ -44,7 +42,6 @@ INSERT INTO category (category_id, category_name) VALUES
 SELECT * FROM category ORDER BY category_id ASC;
 
 -- PRODUCT TABLE --------------------------------------------------------------------------------------------------------------
-
 CREATE TABLE product (
     product_id VARCHAR(10) PRIMARY KEY,
     category_id VARCHAR(100),
@@ -96,21 +93,18 @@ drop table orders
 SELECT * FROM orders
  
  -- ORDER TABLE --------------------------------------------------------------------------------------------------------------
-
 CREATE TABLE orders (
-    order_id VARCHAR(20) PRIMARY KEY,
-    product_id VARCHAR(10) NOT NULL,
-    cart_id VARCHAR(100) NOT NULL,
+    order_id VARCHAR(100) PRIMARY KEY,
+    transaction_id VARCHAR(100) NOT NULL, 
+    product_id VARCHAR(250) NOT NULL,
     student_number VARCHAR(7) NOT NULL,
     image_url VARCHAR(255) NOT NULL,
     order_date DATE NOT NULL,
-    quantity INT NOT NULL,
+    quantity VARCHAR(150) NOT NULL,
     total_amount DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (product_id) REFERENCES product(product_id),
-    FOREIGN KEY (student_number) REFERENCES users(student_number),
-    FOREIGN KEY (cart_id) REFERENCES cart(cart_id) ON DELETE CASCADE
+    FOREIGN KEY (student_number) REFERENCES users(student_number)
 );
-
 
 DELIMITER $$
 CREATE TRIGGER before_insert_orders
@@ -121,12 +115,8 @@ BEGIN
     SELECT IFNULL(MAX(CAST(SUBSTRING(order_id, 5) AS UNSIGNED)), 0) + 1
     INTO next_order_id FROM orders;
     SET NEW.order_id = CONCAT('ORD-', LPAD(next_order_id, 3, '0'));
-    SET NEW.order_date = CURDATE();
+    IF NEW.order_date IS NULL THEN
+        SET NEW.order_date = CURDATE();
+    END IF;
 END$$
 DELIMITER ;
-
- -- PAYMENT TABLE --------------------------------------------------------------------------------------------------------------
-
-
- -- SHIPMENT TABLE --------------------------------------------------------------------------------------------------------------
-
