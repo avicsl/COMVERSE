@@ -1,6 +1,6 @@
 # COMVERSE
 
-**COMVERSE** is an academic e-commerce system designed specifically for Computer Science students. This project emphasizes the importance of efficient and well-structured databases in modern applications, particularly those involving user interaction and real-time data.
+**COMVERSE** is an academic e-commerce system designed specifically for Computer Science students. This project emphasizes the importance of efficient and well-structured databases in modern applications, particularly those involving user interaction and real-time data. 
 
 ## Project Overview
 
