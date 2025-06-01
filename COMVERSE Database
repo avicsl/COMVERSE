@@ -25,7 +25,6 @@ BEGIN
 END$$
 DELIMITER ;
 
-
 -- CATEGORY TABLE --------------------------------------------------------------------------------------------------------------
 CREATE TABLE category (
     category_id VARCHAR(100) PRIMARY KEY,
