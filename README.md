@@ -10,7 +10,7 @@ Rather than focusing on user interface design or front-end development, COMVERSE
 - **User Accounts**: Manage user registrations, profiles, and authentication.
 - **Purchase Transactions**: Handle the buying process, ensuring accuracy and reliability.
 
-## Tools and Technologies Used
+## Tools and Technologies Used 
 
 - **Visual Studio Code (VSCode)**: For code editing and project management.
 - **MySQL**: Core relational database management system.
