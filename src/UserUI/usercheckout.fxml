@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="458.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserControllers.UserCheckoutController">
+   <children>
+      <ImageView fitHeight="514.0" fitWidth="894.0" layoutX="-1.0" layoutY="2.0">
+         <image>
+            <Image url="@../../../../Downloads/code.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="258.0" fitWidth="774.0" layoutX="59.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Downloads/paymentt.png" />
+         </image>
+      </ImageView>
+      <Text fill="#165834" layoutX="290.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHECK OUT" textAlignment="CENTER" wrappingWidth="313.3000122070313">
+         <font>
+            <Font name="Rockwell Bold" size="40.0" />
+         </font>
+      </Text>
+      <Button fx:id="addtocartbtn" layoutX="47.0" layoutY="458.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="800.0" style="-fx-background-color: #165834;" text="PLACE ORDER" textFill="WHITE">
+         <font>
+            <Font name="Rockwell Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="61.0" layoutY="89.0" text="Shipping Method:" textFill="#165834">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="134.0" text="Shipping Address:" textFill="#165834">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </Label>
+      <TextField id="fnameTextfield" fx:id="shippingaddress" layoutX="182.0" layoutY="130.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="650.0" promptText="551 MF Jhocson St. Sampaloc, Manila, PH ">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </TextField>
+      <Label layoutX="62.0" layoutY="225.0" text="Payment Method:" textFill="#165834">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="paymentmethod" layoutX="182.0" layoutY="220.0" prefHeight="26.0" prefWidth="650.0" />
+      <Label layoutX="60.0" layoutY="179.0" text="Shipping Amount:" textFill="#165834">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </Label>
+      <TextField id="fnameTextfield" fx:id="samountfield" layoutX="182.0" layoutY="175.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="650.0" promptText="50.00">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </TextField>
+      <Label layoutX="61.0" layoutY="385.0" text="Total Amount:" textFill="#165834">
+         <font>
+            <Font name="Rockwell Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField id="fnameTextfield" fx:id="totalamountfield" layoutX="182.0" layoutY="381.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="650.0" promptText="50000.00">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </TextField>
+      <Button fx:id="addtocartbtn1" layoutX="475.0" layoutY="435.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="62.0" style="-fx-background-color: #165834;" text="I understand" textFill="WHITE">
+         <font>
+            <Font name="Rockwell" size="8.0" />
+         </font>
+      </Button>
+      <Label id="fnameLabel" fx:id="fnameLabel122" alignment="BOTTOM_RIGHT" layoutX="318.0" layoutY="438.0" prefHeight="6.0" prefWidth="150.0" text="make sure all details are correct." textFill="#165834">
+         <font>
+            <Font name="Rockwell" size="8.0" />
+         </font>
+      </Label>
+      <TextField id="fnameTextfield" fx:id="smethodfield" layoutX="182.0" layoutY="85.0" minHeight="-Infinity" prefHeight="23.0" prefWidth="650.0" promptText="Flash Express">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
