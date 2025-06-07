@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="458.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UserControllers.UserProfileController">
+   <children>
+      <ImageView fitHeight="514.0" fitWidth="894.0" layoutX="-1.0" layoutY="2.0">
+         <image>
+            <Image url="@../../../../Downloads/code.jpg" />
+         </image>
+      </ImageView>
+      <Text fill="#165834" layoutX="290.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROFILE" textAlignment="CENTER" wrappingWidth="313.3000122070313">
+         <font>
+            <Font name="Rockwell Bold" size="40.0" />
+         </font>
+      </Text>
+      <TableView fx:id="ordersTable" layoutX="44.0" layoutY="269.0" prefHeight="216.0" prefWidth="800.0" style="-fx-font-family: 'Rockwell'; -fx-selection-bar: #165834;">
+         <columns>
+            <TableColumn fx:id="transactionIdCol" prefWidth="133.33" style="-fx-alignment: CENTER; -fx-font-family: 'Rockwell';" text="Transaction ID" />
+            <TableColumn fx:id="productIdCol" prefWidth="133.33" style="-fx-alignment: CENTER; -fx-font-family: 'Rockwell';" text="Product ID" />
+            <TableColumn fx:id="imageUrlCol" prefWidth="133.33" style="-fx-alignment: CENTER; -fx-font-family: 'Rockwell';" text="Product Image" />
+            <TableColumn fx:id="orderDateCol" prefWidth="133.33" style="-fx-alignment: CENTER; -fx-font-family: 'Rockwell';" text="Order Date" />
+            <TableColumn fx:id="quantityCol" prefWidth="133.33" style="-fx-alignment: CENTER; -fx-font-family: 'Rockwell';" text="Quantity" />
+            <TableColumn fx:id="totalAmountCol" prefWidth="133.3" style="-fx-alignment: CENTER; -fx-font-family: 'Rockwell';" text="Total Amount" />
+         </columns>
+      </TableView>
+
+
+      <Text fill="#165834" layoutX="44.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MY ORDERS" wrappingWidth="313.3000122070313">
+         <font>
+            <Font name="Rockwell Bold" size="26.0" />
+         </font>
+      </Text>
+      <Label id="fnameLabel" fx:id="fnameLabel" layoutX="58.0" layoutY="116.0" prefHeight="18.0" prefWidth="72.0" text="First Name:" textFill="#165834">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </Label>
+      <Label id="lnameLabel" fx:id="lnameLabel" layoutX="462.0" layoutY="117.0" prefHeight="18.0" prefWidth="72.0" text="Last Name:" textFill="#165834">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </Label>
+      <Label id="fnameLabel" fx:id="passengerID" layoutX="58.0" layoutY="85.0" prefHeight="18.0" prefWidth="86.0" text="Student ID:" textFill="#165834">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </Label>
+      <TextField id="fnameTextfield" fx:id="fnameTextfield" layoutX="154.0" layoutY="114.0" prefHeight="18.0" prefWidth="249.0" promptText="Junhui" style="-fx-background-radius: 50; -fx-background-color: TRANSPARENT;">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </TextField>
+      <TextField id="lnameTextfield" fx:id="lnameTextfield" layoutX="558.0" layoutY="115.0" prefHeight="23.0" prefWidth="249.0" promptText="Moon" style="-fx-background-radius: 50; -fx-background-color: TRANSPARENT;">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </TextField>
+      <TextField id="fnameTextfield" fx:id="IDTextfield" layoutX="153.0" layoutY="81.0" prefHeight="18.0" prefWidth="249.0" promptText="AAP-XXX" style="-fx-background-radius: 50; -fx-background-color: TRANSPARENT;">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </TextField>
+      <Line endX="614.4000244140625" endY="-7.62939453125E-6" layoutX="228.0" layoutY="74.0" startX="-183.20001220703125" startY="-7.62939453125E-6" stroke="#cccaca" />
+      <Line endX="614.4000244140625" endY="-7.62939453125E-6" layoutX="228.0" layoutY="109.0" startX="-183.20001220703125" startY="-7.62939453125E-6" stroke="#cccaca" />
+      <Line endX="614.4000244140625" endY="-7.62939453125E-6" layoutX="228.0" layoutY="144.0" startX="-183.20001220703125" startY="-7.62939453125E-6" stroke="#cccaca" />
+      <Label id="fnameLabel" fx:id="emaillbl" layoutX="58.0" layoutY="155.0" prefHeight="18.0" prefWidth="72.0" text="Email:" textFill="#165834">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </Label>
+      <Label id="lnameLabel" fx:id="passwordlbl" layoutX="462.0" layoutY="156.0" prefHeight="18.0" prefWidth="72.0" text="Password:" textFill="#165834">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </Label>
+      <TextField id="fnameTextfield" fx:id="emailTextField" layoutX="154.0" layoutY="152.0" prefHeight="18.0" prefWidth="249.0" promptText="junmoon@gmail.com" style="-fx-background-radius: 50; -fx-background-color: TRANSPARENT;">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </TextField>
+      <TextField id="lnameTextfield" fx:id="passwordTextfield" layoutX="558.0" layoutY="154.0" prefHeight="23.0" prefWidth="249.0" promptText="●●●●●●●●" style="-fx-background-radius: 50; -fx-background-color: TRANSPARENT;">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </TextField>
+      <Line endX="614.4000244140625" endY="-7.62939453125E-6" layoutX="223.0" layoutY="179.0" startX="-183.20001220703125" startY="-7.62939453125E-6" stroke="#cccaca" />
+      <Label id="fnameLabel" fx:id="deptlbl" layoutX="58.0" layoutY="189.0" prefHeight="18.0" prefWidth="72.0" text="Department:" textFill="#165834">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </Label>
+      <Label id="lnameLabel" fx:id="courselbl" layoutX="462.0" layoutY="190.0" prefHeight="18.0" prefWidth="72.0" text="Course:" textFill="#165834">
+         <font>
+            <Font name="Rockwell" size="12.0" />
+         </font>
+      </Label>
+      <Line endX="614.4000244140625" endY="-7.62939453125E-6" layoutX="228.0" layoutY="214.0" startX="-183.20001220703125" startY="-7.62939453125E-6" stroke="#cccaca" />
+      <Button fx:id="editbtn" layoutX="727.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleEditButton" prefHeight="24.0" prefWidth="110.0" style="-fx-background-color: #165834;" text="Edit Profile" textFill="WHITE">
+         <font>
+            <Font name="Rockwell" size="11.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="deptcombobox" layoutX="154.0" layoutY="185.0" prefHeight="26.0" prefWidth="280.0" promptText="College of Allied Health" style="-fx-background-color: transparent;" />
+      <ComboBox fx:id="coursecombobox" layoutX="558.0" layoutY="186.0" prefHeight="26.0" prefWidth="280.0" promptText="Bachelor of Science in Nursing" style="-fx-background-color: transparent;" />
+      <Button fx:id="deleteBtn" layoutX="727.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleDeleteButton" prefHeight="24.0" prefWidth="110.0" style="-fx-background-color: #165834;" text="Marked as Received" textFill="WHITE">
+         <font>
+            <Font name="Rockwell" size="10.0" />
+         </font>
+      </Button>
+      <Text fill="#165834" layoutX="44.0" layoutY="498.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You will receive your order after three (3) days after your order date then you can mark that as received." textAlignment="CENTER" wrappingWidth="800.0">
+         <font>
+            <Font name="Rockwell" size="10.0" />
+         </font>
+      </Text>
+      <Button fx:id="cancelBtn" layoutX="603.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleCancelOrderButton" prefHeight="24.0" prefWidth="110.0" style="-fx-background-color: #165834;" text="Cancel Order" textFill="WHITE">
+         <font>
+            <Font name="Rockwell" size="10.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
