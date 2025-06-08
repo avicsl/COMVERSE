@@ -9,8 +9,8 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    department VARCHAR(50) NOT NULL,
-    course VARCHAR(50) NOT NULL
+    department VARCHAR(100) NOT NULL,
+    course VARCHAR(100) NOT NULL
 );
 
 DELIMITER $$
@@ -24,6 +24,7 @@ BEGIN
     SET NEW.student_number = CONCAT('CV-', LPAD(next_student_number, 3, '0'));
 END$$
 DELIMITER ;
+
 
 -- CATEGORY TABLE --------------------------------------------------------------------------------------------------------------
 CREATE TABLE category (
@@ -87,9 +88,6 @@ BEGIN
     SET NEW.cart_id = CONCAT('CART-', LPAD(next_cart_id, 3, '0'));
 END$$
 DELIMITER ;
-
-drop table orders
-SELECT * FROM orders
  
  -- ORDER TABLE --------------------------------------------------------------------------------------------------------------
 CREATE TABLE orders (
@@ -120,16 +118,19 @@ BEGIN
 END$$
 DELIMITER ;
 
+ALTER TABLE orders ADD COLUMN user_marked_received TINYINT(1) DEFAULT 0;
+ALTER TABLE orders ADD COLUMN received_date TIMESTAMP NULL;
 -- SHIPPING TABLE --------------------------------------------------------------------------------------------------------------
 CREATE TABLE shipping (
     shipping_id VARCHAR(100) PRIMARY KEY,
-    order_id VARCHAR(100) NOT NULL,
+    transaction_id VARCHAR(100) NOT NULL,  
+    student_number VARCHAR(7) NOT NULL,    
     shipping_address VARCHAR(255) NOT NULL,
     shipping_date DATE NOT NULL,
     shipping_amount DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+    FOREIGN KEY (student_number) REFERENCES users(student_number)
 );
-
+ 
 DELIMITER $$
 CREATE TRIGGER before_insert_shipping
 BEFORE INSERT ON shipping
@@ -145,17 +146,18 @@ BEGIN
     SET NEW.shipping_amount = 40;
 END$$
 DELIMITER ;
-
+ 
 -- PAYMENT TABLE --------------------------------------------------------------------------------------------------------------
 CREATE TABLE payment (
     payment_id VARCHAR(100) PRIMARY KEY,
-    order_id VARCHAR(100) NOT NULL,
-    payment_amount DECIMAL(10,2) NOT NULL,
+    transaction_id VARCHAR(100) NOT NULL,  
+    student_number VARCHAR(7) NOT NULL,    
+    payment_amount DECIMAL(10,2) NOT NULL, 
     payment_method VARCHAR(50) NOT NULL,
     payment_date DATE NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+    FOREIGN KEY (student_number) REFERENCES users(student_number)
 );
-
+ 
 DELIMITER $$
 CREATE TRIGGER before_insert_payment
 BEFORE INSERT ON payment
