@@ -178,7 +178,7 @@ public class UserCheckoutController {
         // Check if shipping information has been saved first
         if (!shippingInfoSaved) {
             showAlert("Message", "Please read the note and click 'I understand' first.");
-            return
+            return;
         }
 
         String address = shippingaddress.getText().trim();
