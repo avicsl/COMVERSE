@@ -45,13 +45,13 @@ public class UserSignupController {
     private ComboBox<String> deptcombobox;
  
     private final ObservableList<String> departments = FXCollections.observableArrayList(
-        "College of Allied Health",
-        "College of Architecture",
-        "College of Business and Accountancy",
-        "College of Computing and Information Technologies",
-        "College of Education, Arts and Sciences",
-        "College of Engineering",
-        "College of Hospitality and Tourism Management"
+        "CAH - College of Allied Health",
+        "COA - College of Architecture",
+        "CBA - College of Business and Accountancy",
+        "CCIT - College of Computing and Information Technologies",
+        "CEAS - College of Education, Arts and Sciences",
+        "COE - College of Engineering",
+        "CHTM - College of Hospitality and Tourism Management"
     );
  
     private final Map<String, ObservableList<String>> coursesMap = new HashMap<>();
@@ -68,16 +68,16 @@ public class UserSignupController {
         });
  
         // Map courses to departments
-        coursesMap.put("College of Allied Health", FXCollections.observableArrayList(
+        coursesMap.put("CAH - College of Allied Health", FXCollections.observableArrayList(
             "BS Nursing",
             "BS Pharmacy",
             "BS Medical Technology / Medical Laboratory Science"
         ));
-        coursesMap.put("College of Architecture", FXCollections.observableArrayList(
+        coursesMap.put("COA - College of Architecture", FXCollections.observableArrayList(
             "BS Architecture",
             "BS Environmental Planning"
         ));
-        coursesMap.put("College of Business and Accountancy", FXCollections.observableArrayList(
+        coursesMap.put("CBA - College of Business and Accountancy", FXCollections.observableArrayList(
             "BS Accountancy",
             "BS Accounting Information System",
             "BS Management Accounting",
@@ -85,7 +85,7 @@ public class UserSignupController {
             "BSBA Financial Management",
             "BSBA Marketing Management"
         ));
-        coursesMap.put("College of Computing and Information Technologies", FXCollections.observableArrayList(
+        coursesMap.put("CCIT - College of Computing and Information Technologies", FXCollections.observableArrayList(
             "BS Computer Science",
             "BS Information Technology",
             "Associate in Computer Technology",
@@ -93,7 +93,7 @@ public class UserSignupController {
             "Master in Information Technology",
             "Doctor of Philosophy in Computer Science"
         ));
-        coursesMap.put("College of Education, Arts and Sciences", FXCollections.observableArrayList(
+        coursesMap.put("CEAS - College of Education, Arts and Sciences", FXCollections.observableArrayList(
             "AB English Language Studies",
             "BA Communication",
             "BS Psychology",
@@ -103,7 +103,7 @@ public class UserSignupController {
             "Master of Arts in Education (major in English, Filipino, Educational Management, Special Education)",
             "Doctor of Education (Educational Management)"
         ));
-        coursesMap.put("College of Engineering", FXCollections.observableArrayList(
+        coursesMap.put("COE - College of Engineering", FXCollections.observableArrayList(
             "BS Civil Engineering",
             "BS Computer Engineering",
             "BS Electrical Engineering",
@@ -112,7 +112,7 @@ public class UserSignupController {
             "BS Environmental and Sanitary Engineering",
             "Master of Science in Sanitary Engineering"
         ));
-        coursesMap.put("College of Hospitality and Tourism Management", FXCollections.observableArrayList(
+        coursesMap.put("CHTM - College of Hospitality and Tourism Management", FXCollections.observableArrayList(
             "BS Hospitality Management",
             "BS Tourism Management"
         ));
